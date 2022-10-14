@@ -1,0 +1,38 @@
+.table {
+  width: 100%;
+
+  table-layout: fixed;
+
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+
+.table thead tr:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  text-align: left;
+
+  padding: 5px;
+}
+
+.table td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cell-type-money {
+  text-align: right;
+}
