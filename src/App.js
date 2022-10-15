@@ -18,7 +18,7 @@ function App() {
         rows={tableData.rows}
         types={types}
         initialSortColumn="number"
-        initialSortDirection="ascending"
+        initialSortOrder="ascending"
       />
     </div>
   );
