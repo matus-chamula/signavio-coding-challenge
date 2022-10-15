@@ -1,6 +1,7 @@
-import { useState } from "react";
 import TableBody from "./TableBody";
 import classNames from "./Table.module.css";
+import { useState } from "react";
+import { convertDate } from "./helpers";
 import { ReactComponent as AscIcon } from "./order-ascending.svg";
 import { ReactComponent as DescIcon } from "./order-descending.svg";
 
@@ -36,13 +37,6 @@ const Table = ({ columns, rows, types, initialSortColumn, initialSortOrder }) =>
         return [...rows].sort((a, b) => (Date.parse(convertDate(a[newSortParams.column])) < Date.parse(convertDate(b[newSortParams.column])) ? 1 : -1));
       }
     }
-  };
-
-  // Helper function for converting date from dd-mm-yyyy to mm-dd-yyyy format
-  const convertDate = (date) => {
-    const resultDate = date.split(/-/);
-    // First condition handles special case for values like "2020" or "Unknown" where the resultDate array contains a single value
-    return resultDate[1] === undefined ? resultDate[0] : [resultDate[1], resultDate[0], resultDate[2]].join("-");
   };
 
   const [tableData, setTableData] = useState(() => sortTable({ column: initialSortColumn, order: initialSortOrder }));
