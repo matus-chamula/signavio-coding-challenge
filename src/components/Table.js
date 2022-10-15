@@ -5,6 +5,10 @@ import { ReactComponent as AscIcon } from "./order-ascending.svg";
 import { ReactComponent as DescIcon } from "./order-descending.svg";
 
 const Table = ({ columns, rows, types, initialSortColumn, initialSortOrder }) => {
+  ///////////////////////////
+  // Sorting functionality //
+  ///////////////////////////
+
   const [sortParams, setSortParams] = useState(() => ({ column: initialSortColumn, order: initialSortOrder }));
 
   const sortTable = (newSortParams) => {
@@ -50,11 +54,52 @@ const Table = ({ columns, rows, types, initialSortColumn, initialSortOrder }) =>
     setTableData(sortTable({ column, order }));
   };
 
+  /////////////////////////////
+  // Filtering functionality //
+  /////////////////////////////
+
+  const [filterParams, setFilterParams] = useState(() => {});
+
+  const filterTable = (rows, filters) => {
+    // Return the whole table in case there are no filters
+    if (!filters) {
+      return rows;
+    }
+    if (filters) {
+      return rows.filter((row) => {
+        return Object.keys(filters).every((column) => {
+          const value = row[column];
+          const searchValue = filters[column];
+          return value.toString().toLowerCase().includes(searchValue.toLowerCase());
+        });
+      });
+    }
+  };
+
+  const handleFilter = (expression, column) => {
+    const newFilters = { ...filterParams };
+    // If the expression is empty, delete the given key. Otherwise add the property to newFilters object
+    !expression ? delete newFilters[column] : (newFilters[column] = expression);
+    setFilterParams(newFilters);
+    setTableData(filterTable([...rows], newFilters));
+  };
+
   return (
     <table
       title="Movies"
       className={classNames.table}>
       <thead>
+        <tr>
+          {columns.map(({ id, title }) => (
+            <td key={id}>
+              <input
+                type="search"
+                placeholder={`Search ${title}`}
+                onChange={(e) => handleFilter(e.target.value, id)}
+              />
+            </td>
+          ))}
+        </tr>
         <tr>
           {columns.map(({ id, title }) => (
             <th
