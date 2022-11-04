@@ -1,5 +1,5 @@
-import classNames from "./App.module.css";
-import { Table } from "./components";
+import classNames from "./assets/Styles/App.module.css";
+import { Table } from "./components/Table";
 import tableData from "./data";
 
 const types = {
@@ -10,7 +10,7 @@ const types = {
   worldwideBoxOffice: "money",
 };
 
-function App() {
+export const App = () => {
   return (
     <div className={classNames.app}>
       <Table
@@ -22,6 +22,4 @@ function App() {
       />
     </div>
   );
-}
-
-export default App;
+};

@@ -1,6 +1,6 @@
-import classNames from "./Table.module.css";
+import classNames from "../../assets/Styles/Table.module.css";
 
-const TableBody = ({ rows, columns, types }) => {
+export const TableBody = ({ rows, columns, types }) => {
   return (
     <>
       {rows.map((row, index) => (
@@ -9,7 +9,8 @@ const TableBody = ({ rows, columns, types }) => {
             <td
               data-testid={`row-${index}-${id}`}
               className={classNames[`cell-type-${types[id]}`]}
-              key={id}>
+              key={id}
+            >
               {row[id]}
             </td>
           ))}
@@ -18,5 +19,3 @@ const TableBody = ({ rows, columns, types }) => {
     </>
   );
 };
-
-export default TableBody;
